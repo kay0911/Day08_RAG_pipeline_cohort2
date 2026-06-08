@@ -17,6 +17,9 @@ Score threshold logic:
 """
 
 import logging
+import os
+
+os.environ.setdefault("USE_TF", "0")
 
 log = logging.getLogger(__name__)
 

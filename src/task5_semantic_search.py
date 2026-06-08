@@ -7,7 +7,10 @@ Returns results sorted by cosine similarity (descending).
 """
 
 import logging
+import os
 from pathlib import Path
+
+os.environ.setdefault("USE_TF", "0")
 
 log = logging.getLogger(__name__)
 

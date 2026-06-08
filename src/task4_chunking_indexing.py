@@ -16,8 +16,13 @@ Design choices:
 """
 
 import logging
+import os
 import uuid
 from pathlib import Path
+
+# Prevent transformers from importing TensorFlow (Keras 3 incompatibility).
+# Must be set before any transformers/sentence_transformers import.
+os.environ.setdefault("USE_TF", "0")
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 log = logging.getLogger(__name__)

@@ -17,6 +17,8 @@ Document reordering tránh "lost in the middle" (Liu et al. 2023):
 import logging
 import os
 
+os.environ.setdefault("USE_TF", "0")
+
 from dotenv import load_dotenv
 
 load_dotenv()

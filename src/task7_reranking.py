@@ -16,7 +16,10 @@ unified rerank() interface:
 """
 
 import logging
+import os
 from typing import Optional
+
+os.environ.setdefault("USE_TF", "0")
 
 log = logging.getLogger(__name__)
 

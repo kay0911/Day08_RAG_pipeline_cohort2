@@ -14,7 +14,10 @@ Corpus được load từ data/standardized/ và index lại BM25 mỗi lần kh
 """
 
 import logging
+import os
 from pathlib import Path
+
+os.environ.setdefault("USE_TF", "0")
 
 log = logging.getLogger(__name__)
 
