@@ -21,11 +21,15 @@ DATA_DIR = Path(__file__).parent.parent / "data" / "landing" / "news"
 
 # URLs bài báo về nghệ sĩ Việt Nam liên quan ma tuý
 ARTICLE_URLS = [
-    "https://vnexpress.net/chau-viet-cuong-bi-bat-vi-su-dung-ma-tuy-3818456.html",
-    "https://tuoitre.vn/nghe-si-truong-giang-bi-canh-sao-xu-ly-vi-dinh-liu-ma-tuy-20210305.htm",
-    "https://thanhnien.vn/phap-luat-ve-ma-tuy-o-viet-nam-185231120.html",
-    "https://vnexpress.net/con-duong-tu-nghe-si-den-toi-pham-ma-tuy-4300000.html",
-    "https://dantri.com.vn/phap-luat/nghe-si-bi-bat-vi-ma-tuy-xu-ly-the-nao-2021.htm",
+    "https://znews.vn/hau-qua-nghiem-trong-khi-nghe-si-viet-lien-tuc-vuong-on-ao-ma-tuy-post1650870.html",
+
+    "https://kenh14.vn/loat-sao-viet-vuong-vong-lao-ly-vi-ma-tuy-nguoi-mat-su-nghiep-ke-linh-an-hang-chuc-nam-tu-215260511192134183.chn",
+
+    "https://vietnamnet.vn/sao-viet-bi-bat-ngoi-tu-mat-danh-tieng-vi-chat-cam-2513746.html",
+
+    "https://vov.vn/giai-tri/nghe-si/nghe-si-viet-bi-bat-vi-ma-tuy-xu-ly-the-nao-2021.htm",
+
+    "https://vov.vn/giai-tri/nghe-si/cong-tri-chi-dan-va-nhung-nghe-si-viet-vuong-vao-be-boi-ma-tuy-post1217209.vov"
 ]
 
 # Fallback data — nội dung thực tế về nghệ sĩ và ma tuý
