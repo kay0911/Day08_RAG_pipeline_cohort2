@@ -1,0 +1,45 @@
+# Cảnh sát TP.HCM bắt giữ nhiều nghệ sĩ trong chiến dịch chống ma tuý
+
+**Source:** https://dantri.com.vn/canh-sat-bat-nghe-si-su-dung-ma-tuy
+**Crawled:** 2024-01-15T10:50:00
+
+---
+
+# Cảnh sát TP.HCM bắt giữ nhiều nghệ sĩ trong chiến dịch chống ma tuý
+
+Trong chiến dịch đấu tranh chống tội phạm ma tuý năm 2023, Công an TP.HCM đã tiến hành kiểm tra nhiều tụ điểm ăn chơi và phát hiện một số nghệ sĩ, người nổi tiếng có sử dụng chất kích thích.
+
+## Chiến dịch "Siết chặt, không khoan nhượng"
+
+Công an TP.HCM đã tiến hành hơn 1.000 cuộc kiểm tra trong năm 2023, phát hiện và xử lý hàng trăm trường hợp vi phạm về ma tuý. Trong số này có nhiều người hoạt động trong lĩnh vực giải trí.
+
+## Phương pháp xét nghiệm ma tuý
+
+Cảnh sát sử dụng nhiều phương pháp phát hiện người sử dụng ma tuý:
+1. Test nhanh tại chỗ (que thử nước tiểu)
+2. Xét nghiệm máu tại phòng lab
+3. Kiểm tra mống mắt
+4. Test tóc (phát hiện được chất ma tuý đã sử dụng trong 90 ngày)
+
+## Các chất ma tuý phổ biến trong giới giải trí
+
+Theo thông tin từ cơ quan điều tra, các chất ma tuý thường được phát hiện trong giới nghệ sĩ gồm:
+- **Methamphetamine (ma tuý đá)**: Gây ảo giác, hưng phấn mạnh, nguy cơ nghiện cao
+- **MDMA (ecstasy)**: Thường được dùng tại các buổi tiệc tùng
+- **Cocaine**: Ít phổ biến hơn nhưng vẫn xuất hiện ở một số môi trường giải trí cao cấp
+- **Cần sa (marijuana)**: Được nhận thức sai là "nhẹ", nhưng vẫn bị pháp luật Việt Nam nghiêm cấm
+
+## Quy trình xử lý khi bị bắt
+
+Khi bị phát hiện sử dụng ma tuý, quy trình xử lý như sau:
+1. Lập biên bản, thu giữ tang vật
+2. Đưa về trụ sở làm việc, lấy lời khai
+3. Xét nghiệm xác định loại chất ma tuý
+4. Nếu đủ yếu tố cấu thành tội phạm: Khởi tố, bắt tạm giam
+5. Nếu chưa đến mức truy cứu hình sự: Xử phạt vi phạm hành chính, đưa đi cai nghiện bắt buộc
+
+## Cảnh báo từ Bộ Công an
+
+Thiếu tướng Nguyễn Văn Minh, Phó Cục trưởng Cục Cảnh sát điều tra tội phạm về ma tuý, khẳng định: "Bộ Công an không có vùng cấm, không có ngoại lệ trong công tác đấu tranh phòng chống tội phạm ma tuý. Dù là ai, kể cả người nổi tiếng, nếu vi phạm đều bị xử lý theo đúng quy định của pháp luật."
+
+*Nguồn: Dân Trí, 2023*
