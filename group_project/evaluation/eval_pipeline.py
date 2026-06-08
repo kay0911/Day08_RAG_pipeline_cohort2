@@ -426,9 +426,17 @@ if __name__ == "__main__":
     results_df = evaluate_with_ragas(pipeline_a, golden_dataset)
     print(results_df[METRICS_ORDER].describe())
 
-    # A/B comparison
+    # A/B comparison — Tái sử dụng kết quả Config A để tiết kiệm API và thời gian
     print("\nRunning A/B comparison (hybrid_rerank vs dense_only) ...")
-    comparison = compare_configs(golden_dataset)
+    pipeline_b = DenseOnlyPipeline()
+    print(f"Evaluating config: {pipeline_b.name} ...")
+    results_b_df = evaluate_with_ragas(pipeline_b, golden_dataset)
+    print(f"  Done: {pipeline_b.name}")
+
+    comparison = {
+        "hybrid_rerank": results_df,
+        "dense_only": results_b_df
+    }
 
     # Export
     export_results(results_df, comparison)

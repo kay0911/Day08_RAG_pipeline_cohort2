@@ -171,7 +171,86 @@ run_dashboard()
 ## Kiến Trúc Hệ Thống
 
 ```
-[Vẽ diagram kiến trúc ở đây]
+╔══════════════════════════════════════════════════════════════════════════╗
+║                          NGUỒN DỮ LIỆU                                  ║
+║  ┌──────────────────────────┐      ┌──────────────────────────────┐      ║
+║  │   Văn bản pháp luật      │      │     Tin tức nghệ sĩ          │      ║
+║  │  Luật PCMT 2021 (DOCX)   │      │  Web crawl / JSON articles   │      ║
+║  │  BLHS 2015 Chương XX     │      │  (Crawl4AI / sample data)    │      ║
+║  │  Nghị định 105/2021      │      │                              │      ║
+║  └────────────┬─────────────┘      └──────────────┬───────────────┘      ║
+║               │  Task 1                            │  Task 2              ║
+╚═══════════════╪════════════════════════════════════╪══════════════════════╝
+                │                                    │
+                ▼                                    ▼
+╔══════════════════════════════════════════════════════════════════════════╗
+║                   XỬ LÝ & CHUẨN HÓA  (Task 3)                          ║
+║              MarkItDown: DOCX / JSON  →  Markdown (.md)                 ║
+║              Output: data/standardized/legal/  +  news/                 ║
+╚══════════════════════════════════════╦═══════════════════════════════════╝
+                                       ║
+                                       ▼
+╔══════════════════════════════════════════════════════════════════════════╗
+║                  CHUNKING & INDEXING  (Task 4)                          ║
+║   RecursiveCharacterTextSplitter  chunk_size=500, overlap=100           ║
+║   Embedding: BAAI/bge-m3  (dim=1024, multilingual, CPU)                ║
+║   Vector Store: ChromaDB PersistentClient  (cosine similarity)          ║
+╚══════════════╦═══════════════════════════════════╦══════════════════════╝
+               ║                                   ║
+               ▼                                   ▼
+╔══════════════════════════╗           ╔═══════════════════════════╗
+║  Semantic Search (Task 5)║           ║  Lexical Search  (Task 6) ║
+║  Dense vector lookup     ║           ║  BM25Okapi (rank-bm25)    ║
+║  ChromaDB query (cosine) ║           ║  Whitespace tokenization  ║
+║  score = 1 - distance    ║           ║  score > 0 filter         ║
+╚══════════════╦═══════════╝           ╚══════════════╦════════════╝
+               ║                                      ║
+               ╚══════════════════╦═══════════════════╝
+                                  ▼
+╔══════════════════════════════════════════════════════════════════════════╗
+║                      RERANKING  (Task 7)                                ║
+║   RRF  (Reciprocal Rank Fusion):  score = Σ 1 / (k + rank),  k=60      ║
+║   MMR  (Maximal Marginal Relevance):  balance relevance vs diversity    ║
+╚══════════════════════════════════╦═══════════════════════════════════════╝
+                                   ║         ┌───────────────────────────┐
+                                   ║         │  PageIndex Fallback       │
+                                   ║         │       (Task 8)            │
+                                   ║         │  Vectorless RAG, API-key  │
+                                   ║         │  optional (graceful skip) │
+                                   ║         └─────────────┬─────────────┘
+                                   ╚═════════════════╦══════╝
+                                                     ▼
+╔══════════════════════════════════════════════════════════════════════════╗
+║               RETRIEVAL PIPELINE  (Task 9)                              ║
+║  Semantic (×3) + Lexical (×3)  →  RRF Merge  →  Rerank               ║
+║  score < 0.005  →  PageIndex fallback  →  [] nếu không có kết quả     ║
+╚══════════════════════════════════╦═══════════════════════════════════════╝
+                                   ║
+                                   ▼
+╔══════════════════════════════════════════════════════════════════════════╗
+║              GENERATION + CITATION  (Task 10)                           ║
+║  Reorder chunks (lost-in-middle mitigation, Liu et al. 2023)           ║
+║  Format context  [Tài liệu N | Nguồn: X | Loại: Y]                    ║
+║  LLM: GPT-4o-mini  (fallback: Claude claude-haiku-4-5)                         ║
+║  temperature=0.3, top_p=0.9, max_tokens=1500                           ║
+╚══════════════════════════════════╦═══════════════════════════════════════╝
+                                   ║
+                                   ▼
+╔══════════════════════════════════════════════════════════════════════════╗
+║                   GIAO DIỆN CHATBOT  (Streamlit)                        ║
+║  ┌────────────────┐  ┌─────────────────────┐  ┌──────────────────────┐ ║
+║  │  Chat Input    │  │  Conversation Memory │  │  Source Documents    │ ║
+║  │  (câu hỏi)     │  │  (follow-up support) │  │  (citations hiển thị)│ ║
+║  └────────────────┘  └─────────────────────┘  └──────────────────────┘ ║
+╚══════════════════════════════════╦═══════════════════════════════════════╝
+                                   ║
+                                   ▼
+╔══════════════════════════════════════════════════════════════════════════╗
+║              EVALUATION PIPELINE  (DeepEval / RAGAS)                   ║
+║  Golden Dataset 15+ Q&A  →  4 metrics:                                 ║
+║  Faithfulness │ Answer Relevance │ Context Recall │ Context Precision  ║
+║  A/B comparison: hybrid vs dense-only, reranking vs no-reranking       ║
+╚══════════════════════════════════════════════════════════════════════════╝
 ```
 
 ---
@@ -180,10 +259,11 @@ run_dashboard()
 
 | Thành viên | MSSV | Nhiệm vụ | Trạng thái |
 |-----------|------|----------|------------|
-| | | | |
-| | | | |
-| | | | |
-| | | | |
+| Mai Đức Vinh | 2A202600587 | **Trưởng nhóm + Data Pipeline** — Task 1 (thu thập văn bản pháp luật), Task 2 (crawl tin tức), Task 3 (chuẩn hoá Markdown), quản lý repo & tích hợp pipeline | ✅ Hoàn thành |
+| Tống Anh Huy | 2A202600761 | **Embedding & Vector Store** — Task 4 (chunking + BAAI/bge-m3 + ChromaDB), Task 5 (semantic search), tối ưu cấu hình embedding | ✅ Hoàn thành |
+| Nguyễn Mạnh Hiếu | 2A202600887 | **Lexical Search & Reranking** — Task 6 (BM25 lexical search), Task 7 (RRF + MMR reranking), Task 9 (hybrid retrieval pipeline) | ✅ Hoàn thành |
+| Trần Duy Khánh | 2A202600592 | **Generation & UI** — Task 8 (PageIndex vectorless), Task 10 (generation có citation, lost-in-middle reorder), xây dựng Streamlit chatbot (chat, memory, source display) | ✅ Hoàn thành |
+| Nguyễn Đăng Khương | 2A202600584 | **Evaluation** — tạo Golden Dataset 15+ Q&A, viết `eval_pipeline.py` (DeepEval/RAGAS), so sánh A/B configs, viết báo cáo `results.md` | ✅ Hoàn thành |
 
 ---
 
